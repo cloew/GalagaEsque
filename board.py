@@ -14,10 +14,6 @@ class Board(QFrame):
 
         self.ship = HeroShip((self.squareWidth(), self.squareHeight()))
         self.timer = QBasicTimer()
-        self.isWaitingAfterLine = False
-
-        self.curX = 0
-        self.curY = 0
         self.board = []
 
         self.setFocusPolicy(Qt.StrongFocus)
@@ -25,21 +21,6 @@ class Board(QFrame):
         self.isPaused = False
         self.clearBoard()
 
-        # self.unscaled_ship = QImage("hero_ship.png")
-        # matrix = QMatrix()
-        # matrix = matrix.rotate(180)
-        # self.unscaled_ship = self.unscaled_ship.transformed(matrix)
-        
-        # self.scaled_ship = self.unscaled_ship.scaled(self.squareWidth(), self.squareHeight(), Qt.KeepAspectRatio)
-        
-        #self.c = Communicate()
-        #self.nextPiece.setRandomShape()
-
-    def shapeAt(self, x, y):
-        return self.board[(y * Board.BoardWidth) + x]
-
-    def setShapeAt(self, x, y, shape):
-        self.board[(y * Board.BoardWidth) + x] = shape
 
     def squareWidth(self):
         return self.contentsRect().width() / Board.BoardWidth
@@ -56,8 +37,6 @@ class Board(QFrame):
         self.numLinesRemoved = 0
         self.clearBoard()
 
-        #self.c.msgToSB.emit(str(self.numLinesRemoved))
-
         self.timer.start(Board.Speed, self)
 
     def pause(self):
@@ -69,29 +48,19 @@ class Board(QFrame):
         
         if self.isPaused:
             self.timer.stop()
-            #self.c.msgToSB.emit("paused")
         else:
             self.timer.start(Board.Speed, self)
-            #self.c.msgToSB.emit(str(self.numLinesRemoved))
 
         self.update()
 
     def paintEvent(self, event):
-        
+        """ Paint the ship """
         painter = QPainter(self)
         self.ship.draw(painter)
-        rect = self.contentsRect()
-
-        boardTop = rect.bottom() - Board.BoardHeight * self.squareHeight()
-
-        x = self.curX
-        y = self.curY
-        self.drawSquare(painter, rect.left() + x * self.squareWidth(),
-            boardTop + (Board.BoardHeight - y - 1) * self.squareHeight(), 1)
 
     def keyPressEvent(self, event):
-        
-        if not self.isStarted: # or self.curPiece.shape() == Tetrominoes.NoShape:
+        """ Process Keys """
+        if not self.isStarted:
             QWidget.keyPressEvent(self, event)
             return
 
@@ -110,10 +79,6 @@ class Board(QFrame):
             self.ship.down(self.contentsRect().width(), self.contentsRect().height())
         elif key == Qt.Key_Up:
             self.ship.up(self.contentsRect().width(), self.contentsRect().height())
-        # elif key == Qt.Key_Space:
-        #     self.dropDown()
-        # elif key == Qt.Key_D:
-        #     self.oneLineDown()
         else:
             QWidget.keyPressEvent(self, event)
 
@@ -133,19 +98,3 @@ class Board(QFrame):
         """  """
         for i in range(Board.BoardHeight * Board.BoardWidth):
             self.board.append(None)
-
-    def tryMove(self, newX, newY):
-        
-        x = newX
-        y = newY
-        if x < 0 or x >= Board.BoardWidth or y < 0 or y >= Board.BoardHeight:
-            return False
-
-        self.curX = newX
-        self.curY = newY
-        self.update()
-        return True
-
-    def drawSquare(self, painter, x, y, shape):
-        """  """
-        # painter.drawImage(x, y, self.scaled_ship)
