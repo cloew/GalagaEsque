@@ -7,7 +7,7 @@ class Board(QFrame):
     
     BoardWidth = 12
     BoardHeight = 9
-    Speed = 300
+    Speed = 10
 
     def __init__(self, parent):
         super(Board, self).__init__()
@@ -85,8 +85,30 @@ class Board(QFrame):
         if self.ship.update:
             self.update()
 
-    def timerEvent(self, event):
+    def keyReleaseEvent(self, event):
+        """ Process Keys """
+        if not self.isStarted:
+            QWidget.keyPressEvent(self, event)
+            return
+
+        key = event.key()
         
+        if key == Qt.Key_Left:
+            self.ship.releaseLeft()
+        elif key == Qt.Key_Right:
+            self.ship.releaseRight()
+        elif key == Qt.Key_Down:
+            self.ship.releaseDown()
+        elif key == Qt.Key_Up:
+            self.ship.releaseUp()
+        else:
+            QWidget.keyPressEvent(self, event)
+
+        if self.ship.update:
+            self.update()
+
+    def timerEvent(self, event):
+        self.ship.timer(self.contentsRect().width(), self.contentsRect().height())
         if event.timerId() == self.timer.timerId():
             if self.isWaitingAfterLine:
                 self.isWaitingAfterLine = False

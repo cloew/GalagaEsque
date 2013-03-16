@@ -3,6 +3,8 @@ from PySide.QtGui import QImage, QMatrix
 
 class HeroShip:
     """ Hero Ship """
+    MAX_SPEED = 10
+    MIN_SPEED = -10
 
     def __init__(self, squareSize):
         """ Create the hero ship """
@@ -24,6 +26,10 @@ class HeroShip:
         self.scaled_ship = self.unscaled_ship.scaled(squareSize[0], squareSize[1], Qt.KeepAspectRatio)
         self.update = True
 
+    def timer(self, maxX, maxY):
+        """ Handle a timer event """
+        self.tryMove(self.x+self.xVelocity, self.y+self.yVelocity, maxX, maxY)
+
     def draw(self, painter):
         """ Draw the image """
         painter.drawImage(self.x, self.y, self.scaled_ship)
@@ -31,19 +37,44 @@ class HeroShip:
 
     def up(self, maxX, maxY):
         """ Move the ship Up """
-        self.tryMove(self.x, self.y-10, maxX, maxY)
+        self.yVelocity = self.getNewVelocity(self.yVelocity, self.MIN_SPEED)
 
     def down(self, maxX, maxY):
         """ Move the ship Down """
-        self.tryMove(self.x, self.y+10, maxX, maxY)
+        self.yVelocity = self.getNewVelocity(self.yVelocity, self.MAX_SPEED)
 
     def left(self, maxX, maxY):
         """ Move the ship Left """
-        self.tryMove(self.x-10, self.y, maxX, maxY)
+        self.xVelocity = self.getNewVelocity(self.xVelocity, self.MIN_SPEED)
 
     def right(self, maxX, maxY):
         """ Move the ship Right """
-        self.tryMove(self.x+10, self.y, maxX, maxY)
+        self.xVelocity = self.getNewVelocity(self.xVelocity, self.MAX_SPEED)
+
+    def releaseUp(self):
+        """ Move the ship Up """
+        self.yVelocity = self.getNewVelocity(self.yVelocity, self.MAX_SPEED)
+
+    def releaseDown(self):
+        """ Move the ship Down """
+        self.yVelocity = self.getNewVelocity(self.yVelocity, self.MIN_SPEED)
+
+    def releaseLeft(self):
+        """ Move the ship Left """
+        self.xVelocity = self.getNewVelocity(self.xVelocity, self.MAX_SPEED)
+
+    def releaseRight(self):
+        """ Move the ship Right """
+        self.xVelocity = self.getNewVelocity(self.xVelocity, self.MIN_SPEED)
+
+    def getNewVelocity(self, velocity, change):
+        """  """
+        newVelocity = velocity + change
+        if newVelocity > self.MAX_SPEED:
+            newVelocity = self.MAX_SPEED
+        elif newVelocity < self.MIN_SPEED:
+            newVelocity = self.MIN_SPEED
+        return newVelocity
 
     def tryMove(self, newX, newY, maxX, maxY):
         """ Try to move the ship to a new location """
