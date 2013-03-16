@@ -29,6 +29,22 @@ class HeroShip:
         painter.drawImage(self.x, self.y, self.scaled_ship)
         self.update = False
 
+    def up(self, maxX, maxY):
+        """ Move the ship Up """
+        self.tryMove(self.x, self.y-10, maxX, maxY)
+
+    def down(self, maxX, maxY):
+        """ Move the ship Down """
+        self.tryMove(self.x, self.y+10, maxX, maxY)
+
+    def left(self, maxX, maxY):
+        """ Move the ship Left """
+        self.tryMove(self.x-10, self.y, maxX, maxY)
+
+    def right(self, maxX, maxY):
+        """ Move the ship Right """
+        self.tryMove(self.x+10, self.y, maxX, maxY)
+
     def tryMove(self, newX, newY, maxX, maxY):
         """ Try to move the ship to a new location """
         if self.validPosition(newX, maxX, self.scaled_ship.rect().width() ):

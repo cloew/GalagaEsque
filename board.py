@@ -103,13 +103,13 @@ class Board(QFrame):
         if self.isPaused:
             return
         elif key == Qt.Key_Left:
-            self.ship.tryMove(self.ship.x-10, self.ship.y, self.contentsRect().width(), self.contentsRect().height())
+            self.ship.left(self.contentsRect().width(), self.contentsRect().height())
         elif key == Qt.Key_Right:
-            self.ship.tryMove(self.ship.x+10, self.ship.y, self.contentsRect().width(), self.contentsRect().height())
+            self.ship.right(self.contentsRect().width(), self.contentsRect().height())
         elif key == Qt.Key_Down:
-            self.ship.tryMove(self.ship.x, self.ship.y+10, self.contentsRect().width(), self.contentsRect().height())
+            self.ship.down(self.contentsRect().width(), self.contentsRect().height())
         elif key == Qt.Key_Up:
-            self.ship.tryMove(self.ship.x, self.ship.y-10, self.contentsRect().width(), self.contentsRect().height())
+            self.ship.up(self.contentsRect().width(), self.contentsRect().height())
         # elif key == Qt.Key_Space:
         #     self.dropDown()
         # elif key == Qt.Key_D:
