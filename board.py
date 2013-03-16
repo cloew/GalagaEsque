@@ -1,6 +1,8 @@
 from PySide.QtCore import QBasicTimer, Qt
 from PySide.QtGui import QColor, QFrame, QImage, QMatrix, QPainter, QTransform, QWidget
 
+from hero_ship import HeroShip
+
 class Board(QFrame):
     
     BoardWidth = 12
@@ -10,12 +12,12 @@ class Board(QFrame):
     def __init__(self, parent):
         super(Board, self).__init__()
 
+        self.ship = HeroShip((self.squareWidth(), self.squareHeight()))
         self.timer = QBasicTimer()
         self.isWaitingAfterLine = False
 
         self.curX = 0
         self.curY = 0
-        self.numLinesRemoved = 0
         self.board = []
 
         self.setFocusPolicy(Qt.StrongFocus)
@@ -23,12 +25,12 @@ class Board(QFrame):
         self.isPaused = False
         self.clearBoard()
 
-        self.unscaled_ship = QImage("hero_ship.png")
-        matrix = QMatrix()
-        matrix = matrix.rotate(180)
-        self.unscaled_ship = self.unscaled_ship.transformed(matrix)
+        # self.unscaled_ship = QImage("hero_ship.png")
+        # matrix = QMatrix()
+        # matrix = matrix.rotate(180)
+        # self.unscaled_ship = self.unscaled_ship.transformed(matrix)
         
-        self.scaled_ship = self.unscaled_ship.scaled(self.squareWidth(), self.squareHeight(), Qt.KeepAspectRatio)
+        # self.scaled_ship = self.unscaled_ship.scaled(self.squareWidth(), self.squareHeight(), Qt.KeepAspectRatio)
         
         #self.c = Communicate()
         #self.nextPiece.setRandomShape()
@@ -77,6 +79,7 @@ class Board(QFrame):
     def paintEvent(self, event):
         
         painter = QPainter(self)
+        self.ship.draw(painter)
         rect = self.contentsRect()
 
         boardTop = rect.bottom() - Board.BoardHeight * self.squareHeight()
@@ -100,19 +103,22 @@ class Board(QFrame):
         if self.isPaused:
             return
         elif key == Qt.Key_Left:
-            self.tryMove(self.curX - 1, self.curY)
+            self.ship.tryMove(self.ship.x-10, self.ship.y, self.contentsRect().width(), self.contentsRect().height())
         elif key == Qt.Key_Right:
-            self.tryMove(self.curX + 1, self.curY)
+            self.ship.tryMove(self.ship.x+10, self.ship.y, self.contentsRect().width(), self.contentsRect().height())
         elif key == Qt.Key_Down:
-            self.tryMove(self.curX, self.curY-1)
+            self.ship.tryMove(self.ship.x, self.ship.y+10, self.contentsRect().width(), self.contentsRect().height())
         elif key == Qt.Key_Up:
-            self.tryMove(self.curX, self.curY+1)
+            self.ship.tryMove(self.ship.x, self.ship.y-10, self.contentsRect().width(), self.contentsRect().height())
         # elif key == Qt.Key_Space:
         #     self.dropDown()
         # elif key == Qt.Key_D:
         #     self.oneLineDown()
         else:
             QWidget.keyPressEvent(self, event)
+
+        if self.ship.update:
+            self.update()
 
     def timerEvent(self, event):
         
@@ -141,21 +147,5 @@ class Board(QFrame):
         return True
 
     def drawSquare(self, painter, x, y, shape):
-        colorTable = [0x000000, 0xCC6666, 0x66CC66, 0x6666CC,
-                      0xCCCC66, 0xCC66CC, 0x66CCCC, 0xDAAA00]
-
-        painter.drawImage(x, y, self.scaled_ship)
-
-        # color = QColor(colorTable[shape])
-        # painter.fillRect(x + 1, y + 1, self.squareWidth() - 2, 
-        #     self.squareHeight() - 2, color)
-
-        # painter.setPen(color.lighter())
-        # painter.drawLine(x, y + self.squareHeight() - 1, x, y)
-        # painter.drawLine(x, y, x + self.squareWidth() - 1, y)
-
-        # painter.setPen(color.darker())
-        # painter.drawLine(x + 1, y + self.squareHeight() - 1,
-        #     x + self.squareWidth() - 1, y + self.squareHeight() - 1)
-        # painter.drawLine(x + self.squareWidth() - 1, 
-        #     y + self.squareHeight() - 1, x + self.squareWidth() - 1, y + 1)
+        """  """
+        # painter.drawImage(x, y, self.scaled_ship)
