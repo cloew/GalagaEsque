@@ -1,5 +1,5 @@
 from PySide.QtCore import QBasicTimer, Qt
-from PySide.QtGui import QColor, QFrame, QImage, QMatrix, QPainter, QTransform, QWidget
+from PySide.QtGui import QFrame, QPainter, QWidget
 
 from hero_ship import HeroShip
 

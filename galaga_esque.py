@@ -13,7 +13,6 @@ class GalagaEsque(QMainWindow):
         self.setCentralWidget(self.board)
 
         self.statusbar = self.statusBar()
-        #self.board.c.msgToSB[str].connect(self.statusbar.showMessage)
             
         self.board.start()
         self.center()
