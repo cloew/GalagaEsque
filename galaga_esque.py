@@ -17,6 +17,7 @@ class GalagaEsque(QMainWindow):
             
         self.board.start()
         self.center()
+        self.showFullScreen()
 
     def center(self):
         

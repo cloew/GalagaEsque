@@ -7,7 +7,6 @@ def main(args):
     """ Run the main file """
     app = QApplication(sys.argv)
     galaga = GalagaEsque()
-    galaga.show()
     sys.exit(app.exec_())
 
 if __name__ == "__main__":
