@@ -1,6 +1,6 @@
 from PySide.QtCore import QBasicTimer, QObject
 
-class GameEngine(QObject):
+class GameEngine:
     """ Represents the engine for managing the game """
     Speed = 10
 
@@ -8,17 +8,17 @@ class GameEngine(QObject):
         """ Instantiate the Game Engine """
         self.timer = QBasicTimer()
         self.window = None
-        QObject.__init__(self)
+        self.object = QObject()
+        self.object.timerEvent = self.timerEvent
 
     def start(self, window):
         """ Start the Game Engine """
         self.window = window
-        self.timer.start(GameEngine.Speed, self)
+        self.timer.start(GameEngine.Speed, self.object)
 
     def timerEvent(self, event):
         """ Run the Game Timer Loop """
         self.window.callback(self.windowWidth(), self.windowHeight())
-        #self.ship.timer(self.windowWidth(), self.contentsRect().height())
 
     def windowHeight(self):
         """ Returns the Window Height """
