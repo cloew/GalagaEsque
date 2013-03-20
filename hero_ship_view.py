@@ -1,8 +1,10 @@
+from PySide.QtCore import Qt
+from PySide.QtGui import QImage, QMatrix
 
 class HeroShipView:
     """ Represents the Graphical view of the Hero's ship """
 
-    def __init__(self, ship_model, square_size):
+    def __init__(self, squareSize, ship_model):
         """ Initialize the ship view """
         self.ship_model = ship_model
         self.loadShipImage(squareSize)

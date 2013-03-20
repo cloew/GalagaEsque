@@ -3,6 +3,7 @@ from PySide.QtGui import QFrame, QPainter, QWidget
 
 from game_engine import TheGameEngine
 from hero_ship import HeroShip
+from hero_ship_view import HeroShipView
 
 class Board(QFrame):
     
@@ -14,6 +15,7 @@ class Board(QFrame):
         super(Board, self).__init__()
 
         self.ship = HeroShip((self.squareWidth(), self.squareHeight()))
+        self.ship_view = HeroShipView((self.squareWidth(), self.squareHeight()), self.ship)
         #self.timer = QBasicTimer()
 
         self.setFocusPolicy(Qt.StrongFocus)
@@ -54,7 +56,7 @@ class Board(QFrame):
     def paintEvent(self, event):
         """ Paint the ship """
         painter = QPainter(self)
-        self.ship.draw(painter)
+        self.ship_view.draw(painter)
 
     def keyPressEvent(self, event):
         """ Process Keys """
@@ -115,5 +117,5 @@ class Board(QFrame):
             QFrame.timerEvent(self, event)
 
     def callback(self, width, height):
-        self.ship.timer(width, height)
+        self.ship.timer()
         self.update()
