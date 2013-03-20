@@ -1,25 +1,24 @@
 from PySide.QtCore import QBasicTimer, Qt
 from PySide.QtGui import QFrame, QPainter, QWidget
 
+from game_engine import TheGameEngine
 from hero_ship import HeroShip
 
 class Board(QFrame):
     
-    BoardWidth = 12
-    BoardHeight = 9
-    Speed = 10
+    BoardWidth = 5
+    BoardHeight = 5
+    Speed = 20
 
     def __init__(self, parent):
         super(Board, self).__init__()
 
         self.ship = HeroShip((self.squareWidth(), self.squareHeight()))
-        self.timer = QBasicTimer()
-        self.board = []
+        #self.timer = QBasicTimer()
 
         self.setFocusPolicy(Qt.StrongFocus)
         self.isStarted = False
         self.isPaused = False
-        self.clearBoard()
 
 
     def squareWidth(self):
@@ -34,10 +33,9 @@ class Board(QFrame):
 
         self.isStarted = True
         self.isWaitingAfterLine = False
-        self.numLinesRemoved = 0
-        self.clearBoard()
 
-        self.timer.start(Board.Speed, self)
+        TheGameEngine.start(self)
+        #self.timer.start(Board.Speed, self)
 
     def pause(self):
         
@@ -116,7 +114,6 @@ class Board(QFrame):
         else:
             QFrame.timerEvent(self, event)
 
-    def clearBoard(self):
-        """  """
-        for i in range(Board.BoardHeight * Board.BoardWidth):
-            self.board.append(None)
+    def callback(self, width, height):
+        self.ship.timer(width, height)
+        self.update()
