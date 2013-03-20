@@ -19,7 +19,7 @@ class HeroShipView:
         self.scaled_ship = self.unscaled_ship.scaled(squareSize[0], squareSize[1], Qt.KeepAspectRatio)
         self.update = True
 
-    def draw(self, painter):
+    def draw(self, painter, window):
         """ Draw the image """
-        painter.drawImage(self.ship_model.rectangle.x, self.ship_model.rectangle.y, self.scaled_ship)
+        painter.drawImage(self.ship_model.rectangle.x*window.contentsRect().width()/100, self.ship_model.rectangle.y*window.contentsRect().height()/100, self.scaled_ship)
         self.update = False

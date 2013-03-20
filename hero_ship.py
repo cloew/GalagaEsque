@@ -5,8 +5,8 @@ from game_object_rectangle import GameObjectRectangle
 
 class HeroShip:
     """ Hero Ship """
-    MAX_SPEED = 5
-    MIN_SPEED = -5
+    MAX_SPEED = .5
+    MIN_SPEED = -.5
 
     def __init__(self, squareSize):
         """ Create the hero ship """

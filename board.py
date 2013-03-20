@@ -56,7 +56,7 @@ class Board(QFrame):
     def paintEvent(self, event):
         """ Paint the ship """
         painter = QPainter(self)
-        self.ship_view.draw(painter)
+        self.ship_view.draw(painter, self)
 
     def keyPressEvent(self, event):
         """ Process Keys """
