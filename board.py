@@ -7,16 +7,15 @@ from hero_ship_view import HeroShipView
 
 class Board(QFrame):
     
-    BoardWidth = 5
-    BoardHeight = 5
+    BoardWidth = 10
+    BoardHeight = 10
     Speed = 20
 
     def __init__(self, parent):
         super(Board, self).__init__()
 
-        self.ship = HeroShip((self.squareWidth(), self.squareHeight()))
-        self.ship_view = HeroShipView((self.squareWidth(), self.squareHeight()), self.ship)
-        #self.timer = QBasicTimer()
+        self.ship = HeroShip()
+        self.ship_view = HeroShipView(self.ship)
 
         self.setFocusPolicy(Qt.StrongFocus)
         self.isStarted = False
@@ -32,12 +31,9 @@ class Board(QFrame):
     def start(self):
         if self.isPaused:
             return
-
         self.isStarted = True
-        self.isWaitingAfterLine = False
 
         TheGameEngine.start(self)
-        #self.timer.start(Board.Speed, self)
 
     def pause(self):
         

@@ -8,9 +8,9 @@ class HeroShip:
     MAX_SPEED = .5
     MIN_SPEED = -.5
 
-    def __init__(self, squareSize):
+    def __init__(self):
         """ Create the hero ship """
-        self.rectangle = GameObjectRectangle(10, 10)
+        self.rectangle = GameObjectRectangle(5, 10)
 
         self.xVelocity = 0
         self.yVelocity = 0
@@ -64,13 +64,15 @@ class HeroShip:
 
     def tryMove(self, newX, newY):
         """ Try to move the ship to a new location """
-        if self.validPosition(newX, self.rectangle.width):
-            self.rectangle.x = newX
-
-        if self.validPosition(newY, self.rectangle.height):
-            self.rectangle.y = newY
+        self.rectangle.x = self.getValidPosition(newX, self.rectangle.width)
+        self.rectangle.y = self.getValidPosition(newY, self.rectangle.height)
         self.update = True
 
-    def validPosition(self, newPosition, shipSize):
+    def getValidPosition(self, newPosition, shipSize):
         """ Return if the new Position is a valid Position """
-        return not (newPosition < 0 or newPosition + shipSize > 100)
+        if newPosition < 0:
+            return 0
+        elif newPosition + shipSize > 100:
+            return 100 - shipSize
+        else:
+            return newPosition

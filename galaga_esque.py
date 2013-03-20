@@ -12,7 +12,7 @@ class GalagaEsque(QMainWindow):
 
         self.setCentralWidget(self.board)
 
-        self.statusbar = self.statusBar()
+        #self.statusbar = self.statusBar()
             
         self.board.start()
         self.center()

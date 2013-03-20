@@ -9,3 +9,6 @@ class GameObjectRectangle:
 
         self.width = xSize
         self.height = ySize
+
+    def __repr__(self):
+        return "Position({0},{1}), Size({2}, {3})".format(self.x, self.y, self.width, self.height)
