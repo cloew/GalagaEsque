@@ -19,5 +19,5 @@ class HeroShipView:
 
     def draw(self, painter):
         """ Draw the image """
-        painter.drawImage(self.x, self.y, self.scaled_ship)
+        painter.drawImage(self.ship_model.rectangle.x, self.ship_model.rectangle.y, self.scaled_ship)
         self.update = False
