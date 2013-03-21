@@ -12,7 +12,23 @@ class GameObjectRectangle:
 
     def __repr__(self):
         return "Position({0},{1}), Size({2}, {3})".format(self.x, self.y, self.width, selfyheight)
-
+        
+    def collide(self, other):
+        """ Check if a rectangle collides with another rectangle """
+        return self.collideInX(other) and self.collideInY(other)
+        
+    def collideInX(self, other):
+        """ Check if the rectangle's collide in X """
+        toTheLeft = self.x+self.width < other.x
+        toTheRight = self.x > other.x+other.width
+        return not (toTheLeft or toTheRight)
+        
+    def collideInY(self, other):
+        """ Check if the rectangle's collide in Y """
+        above = self.y+self.height < other.y
+        below = self.y > other.y+other.height
+        return not (above or below)
+        
     def setCenterX(self, x):
         """ Center the Rectangle on the X Coordinate given """
         self.x = x - self.width/2.0
