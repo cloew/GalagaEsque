@@ -13,8 +13,8 @@ class HeroShip:
         """ Create the hero ship """
         self.rectangle = GameObjectRectangle(5, 10)
 
-        self.rectangle.x = 47.5
-        self.rectangle.y = 90
+        self.rectangle.setCenterX(50)
+        self.rectangle.setCenterY(95)
 
         self.xVelocity = 0
         self.yVelocity = 0
