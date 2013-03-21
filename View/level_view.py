@@ -8,26 +8,13 @@ class LevelView(QFrame):
     """ Represents the View of the Level """
 
     def __init__(self, parent, level):
-        super(LevelView, self).__init__()
+        """ Initialize the Level View """
+        QFrame.__init__(self, parent)
 
         self.level = level
         self.ship_view = HeroShipView(self.level.ship)
 
         self.setFocusPolicy(Qt.StrongFocus)
-
-    def pause(self):
-        
-        if not self.isStarted:
-            return
-
-        self.isPaused = not self.isPaused
-        
-        if self.isPaused:
-            self.timer.stop()
-        else:
-            self.timer.start(LevelView.Speed, self)
-
-        self.update()
 
     def paintEvent(self, event):
         """ Paint the ship """

@@ -11,7 +11,6 @@ class GalagaEsque(QMainWindow):
         self.level_controller = LevelController(self)
         self.level_controller.run()
             
-        #self.level.start()
         self.showFullScreen()
 
     def center(self):
