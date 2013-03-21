@@ -7,15 +7,15 @@ from Game.Core.game_object_rectangle import GameObjectRectangle
 
 class EnemyShip:
     """ Enemy Ship """
-    MAX_SPEED = .5
-    MIN_SPEED = -.5
+    MAX_SPEED = .2
+    MIN_SPEED = -.2
 
     def __init__(self):
         """ Create the hero ship """
         self.rectangle = GameObjectRectangle(5, 10)
 
         self.rectangle.setCenterX(50)
-        self.rectangle.moveToTop()
+        self.rectangle.setCenterY(10)
 
         self.xVelocity = EnemyShip.MIN_SPEED
         self.yVelocity = 0
