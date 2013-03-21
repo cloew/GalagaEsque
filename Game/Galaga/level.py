@@ -6,3 +6,7 @@ class Level:
     def __init__(self):
         """ Initialize the level """
         self.ship = HeroShip()
+
+    def performGameCycle(self):
+        """ Runs a single iteration of the Game """
+        self.ship.timer()

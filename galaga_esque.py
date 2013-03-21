@@ -1,4 +1,4 @@
-from View.level_view import LevelView
+from View.level_controller import LevelController
 from PySide.QtGui import QDesktopWidget, QMainWindow
 
 class GalagaEsque(QMainWindow):
@@ -8,14 +8,10 @@ class GalagaEsque(QMainWindow):
 
         self.setGeometry(300, 300, 640, 480)
         self.setWindowTitle('Galaga-Esque')
-        self.level = LevelView(self)
-
-        self.setCentralWidget(self.level)
-
-        #self.statusbar = self.statusBar()
+        self.level_controller = LevelController(self)
+        self.level_controller.run()
             
-        self.level.start()
-        self.center()
+        #self.level.start()
         self.showFullScreen()
 
     def center(self):

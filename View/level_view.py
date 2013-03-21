@@ -2,28 +2,18 @@ from PySide.QtCore import QBasicTimer, Qt
 from PySide.QtGui import QFrame, QPainter, QWidget
 
 from Game.Core.game_engine import TheGameEngine
-from Game.Galaga.level import Level
 from hero_ship_view import HeroShipView
 
 class LevelView(QFrame):
     """ Represents the View of the Level """
 
-    def __init__(self, parent):
+    def __init__(self, parent, level):
         super(LevelView, self).__init__()
 
-        self.level = Level()
+        self.level = level
         self.ship_view = HeroShipView(self.level.ship)
 
         self.setFocusPolicy(Qt.StrongFocus)
-        self.isStarted = False
-        self.isPaused = False
-
-    def start(self):
-        if self.isPaused:
-            return
-        self.isStarted = True
-
-        TheGameEngine.start(self)
 
     def pause(self):
         
@@ -46,18 +36,9 @@ class LevelView(QFrame):
 
     def keyPressEvent(self, event):
         """ Process Keys """
-        if not self.isStarted:
-            QWidget.keyPressEvent(self, event)
-            return
-
         key = event.key()
         
-        if key == Qt.Key_P:
-            self.pause()
-            return
-        if self.isPaused:
-            return
-        elif key == Qt.Key_Left:
+        if key == Qt.Key_Left:
             self.level.ship.left(self.contentsRect().width(), self.contentsRect().height())
         elif key == Qt.Key_Right:
             self.level.ship.right(self.contentsRect().width(), self.contentsRect().height())
@@ -73,10 +54,6 @@ class LevelView(QFrame):
 
     def keyReleaseEvent(self, event):
         """ Process Keys """
-        if not self.isStarted:
-            QWidget.keyPressEvent(self, event)
-            return
-
         key = event.key()
         
         if key == Qt.Key_Left:
@@ -92,7 +69,3 @@ class LevelView(QFrame):
 
         if self.level.ship.update:
             self.update()
-
-    def callback(self, width, height):
-        self.level.ship.timer()
-        self.update()

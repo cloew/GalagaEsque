@@ -7,18 +7,23 @@ class GameEngine:
     def __init__(self):
         """ Instantiate the Game Engine """
         self.timer = QBasicTimer()
+        
         self.window = None
+        self.controller = None
+
         self.object = QObject()
         self.object.timerEvent = self.timerEvent
 
-    def start(self, window):
+    def start(self, window, controller):
         """ Start the Game Engine """
+        self.controller = controller
         self.window = window
         self.timer.start(GameEngine.Speed, self.object)
 
     def timerEvent(self, event):
         """ Run the Game Timer Loop """
-        self.window.callback(self.windowWidth(), self.windowHeight())
+        self.controller.performGameCycle()
+        self.window.update()
 
     def windowHeight(self):
         """ Returns the Window Height """
