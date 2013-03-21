@@ -24,15 +24,6 @@ class EnemyShip:
         """ Handle a timer event """
         self.tryMove(self.rectangle.x+self.xVelocity, self.rectangle.y+self.yVelocity)
 
-    def getNewVelocity(self, velocity, change):
-        """  """
-        newVelocity = velocity + change
-        if newVelocity > self.MAX_SPEED:
-            newVelocity = self.MAX_SPEED
-        elif newVelocity < self.MIN_SPEED:
-            newVelocity = self.MIN_SPEED
-        return newVelocity
-
     def tryMove(self, newX, newY):
         """ Try to move the ship to a new location """
         self.rectangle.x = self.getValidPosition(newX, self.rectangle.width)
@@ -42,8 +33,10 @@ class EnemyShip:
     def getValidPosition(self, newPosition, shipSize):
         """ Return if the new Position is a valid Position """
         if newPosition < 0:
+            self.xVelocity = EnemyShip.MAX_SPEED
             return 0
         elif newPosition + shipSize > 100:
+            self.xVelocity = EnemyShip.MIN_SPEED
             return 100 - shipSize
         else:
             return newPosition
