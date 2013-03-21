@@ -2,31 +2,21 @@ from PySide.QtCore import QBasicTimer, Qt
 from PySide.QtGui import QFrame, QPainter, QWidget
 
 from Game.Core.game_engine import TheGameEngine
-from Game.Galaga.hero_ship import HeroShip
+from Game.Galaga.level import Level
 from hero_ship_view import HeroShipView
 
-class Board(QFrame):
-    
-    BoardWidth = 10
-    BoardHeight = 10
-    Speed = 20
+class LevelView(QFrame):
+    """ Represents the View of the Level """
 
     def __init__(self, parent):
-        super(Board, self).__init__()
+        super(LevelView, self).__init__()
 
-        self.ship = HeroShip()
-        self.ship_view = HeroShipView(self.ship)
+        self.level = Level()
+        self.ship_view = HeroShipView(self.level.ship)
 
         self.setFocusPolicy(Qt.StrongFocus)
         self.isStarted = False
         self.isPaused = False
-
-
-    def squareWidth(self):
-        return self.contentsRect().width() / Board.BoardWidth
-
-    def squareHeight(self):
-        return self.contentsRect().height() / Board.BoardHeight
 
     def start(self):
         if self.isPaused:
@@ -45,7 +35,7 @@ class Board(QFrame):
         if self.isPaused:
             self.timer.stop()
         else:
-            self.timer.start(Board.Speed, self)
+            self.timer.start(LevelView.Speed, self)
 
         self.update()
 
@@ -68,17 +58,17 @@ class Board(QFrame):
         if self.isPaused:
             return
         elif key == Qt.Key_Left:
-            self.ship.left(self.contentsRect().width(), self.contentsRect().height())
+            self.level.ship.left(self.contentsRect().width(), self.contentsRect().height())
         elif key == Qt.Key_Right:
-            self.ship.right(self.contentsRect().width(), self.contentsRect().height())
+            self.level.ship.right(self.contentsRect().width(), self.contentsRect().height())
         elif key == Qt.Key_Down:
-            self.ship.down(self.contentsRect().width(), self.contentsRect().height())
+            self.level.ship.down(self.contentsRect().width(), self.contentsRect().height())
         elif key == Qt.Key_Up:
-            self.ship.up(self.contentsRect().width(), self.contentsRect().height())
+            self.level.ship.up(self.contentsRect().width(), self.contentsRect().height())
         else:
             QWidget.keyPressEvent(self, event)
 
-        if self.ship.update:
+        if self.level.ship.update:
             self.update()
 
     def keyReleaseEvent(self, event):
@@ -90,28 +80,19 @@ class Board(QFrame):
         key = event.key()
         
         if key == Qt.Key_Left:
-            self.ship.releaseLeft()
+            self.level.ship.releaseLeft()
         elif key == Qt.Key_Right:
-            self.ship.releaseRight()
+            self.level.ship.releaseRight()
         elif key == Qt.Key_Down:
-            self.ship.releaseDown()
+            self.level.ship.releaseDown()
         elif key == Qt.Key_Up:
-            self.ship.releaseUp()
+            self.level.ship.releaseUp()
         else:
             QWidget.keyPressEvent(self, event)
 
-        if self.ship.update:
+        if self.level.ship.update:
             self.update()
-
-    def timerEvent(self, event):
-        self.ship.timer(self.contentsRect().width(), self.contentsRect().height())
-        if event.timerId() == self.timer.timerId():
-            if self.isWaitingAfterLine:
-                self.isWaitingAfterLine = False
-            self.update()
-        else:
-            QFrame.timerEvent(self, event)
 
     def callback(self, width, height):
-        self.ship.timer()
+        self.level.ship.timer()
         self.update()
