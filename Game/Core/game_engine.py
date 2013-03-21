@@ -23,7 +23,6 @@ class GameEngine:
     def timerEvent(self, event):
         """ Run the Game Timer Loop """
         self.controller.performGameCycle()
-        self.window.update()
 
     def updateUI(self):
         """ Set the UI to update """
