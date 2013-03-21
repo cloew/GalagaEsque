@@ -18,6 +18,9 @@ class GameEngine:
         """ Start the Game Engine """
         self.controller = controller
         self.window = window
+        self.window.keyPressEvent = self.keyPressed
+        self.window.keyReleaseEvent = self.keyReleased
+        
         self.timer.start(GameEngine.Speed, self.object)
 
     def timerEvent(self, event):
@@ -28,12 +31,12 @@ class GameEngine:
         """ Set the UI to update """
         self.window.update()
 
-    def windowHeight(self):
-        """ Returns the Window Height """
-        return self.window.contentsRect().height()
-    
-    def windowWidth(self):
-        """ Returns the Window Width """
-        return self.window.contentsRect().width()
+    def keyPressed(self, event):
+        """ Called when the window has a key pressed """
+        self.controller.keyPressed(event.key())
+
+    def keyReleased(self, event):
+        """ Called when the window has a key released """
+        self.controller.keyReleased(event.key())
 
 TheGameEngine = GameEngine()

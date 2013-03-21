@@ -23,19 +23,19 @@ class HeroShip:
         """ Handle a timer event """
         self.tryMove(self.rectangle.x+self.xVelocity, self.rectangle.y+self.yVelocity)
 
-    def up(self, maxX, maxY):
+    def up(self):
         """ Move the ship Up """
         self.yVelocity = self.getNewVelocity(self.yVelocity, self.MIN_SPEED)
 
-    def down(self, maxX, maxY):
+    def down(self):
         """ Move the ship Down """
         self.yVelocity = self.getNewVelocity(self.yVelocity, self.MAX_SPEED)
 
-    def left(self, maxX, maxY):
+    def left(self):
         """ Move the ship Left """
         self.xVelocity = self.getNewVelocity(self.xVelocity, self.MIN_SPEED)
 
-    def right(self, maxX, maxY):
+    def right(self):
         """ Move the ship Right """
         self.xVelocity = self.getNewVelocity(self.xVelocity, self.MAX_SPEED)
 

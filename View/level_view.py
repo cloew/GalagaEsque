@@ -19,33 +19,3 @@ class LevelView(QFrame):
         """ Paint the ship """
         painter = QPainter(self)
         self.ship_view.draw(painter, self)
-
-    def keyPressEvent(self, event):
-        """ Process Keys """
-        key = event.key()
-        
-        if key == Qt.Key_Left:
-            self.level.ship.left(self.contentsRect().width(), self.contentsRect().height())
-        elif key == Qt.Key_Right:
-            self.level.ship.right(self.contentsRect().width(), self.contentsRect().height())
-        elif key == Qt.Key_Down:
-            self.level.ship.down(self.contentsRect().width(), self.contentsRect().height())
-        elif key == Qt.Key_Up:
-            self.level.ship.up(self.contentsRect().width(), self.contentsRect().height())
-        
-        QWidget.keyPressEvent(self, event)
-
-    def keyReleaseEvent(self, event):
-        """ Process Keys """
-        key = event.key()
-        
-        if key == Qt.Key_Left:
-            self.level.ship.releaseLeft()
-        elif key == Qt.Key_Right:
-            self.level.ship.releaseRight()
-        elif key == Qt.Key_Down:
-            self.level.ship.releaseDown()
-        elif key == Qt.Key_Up:
-            self.level.ship.releaseUp()
-        
-        QWidget.keyPressEvent(self, event)
