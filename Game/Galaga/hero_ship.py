@@ -14,7 +14,7 @@ class HeroShip:
         self.rectangle = GameObjectRectangle(5, 10)
 
         self.rectangle.setCenterX(50)
-        self.rectangle.setCenterY(95)
+        self.rectangle.moveToBottom()
 
         self.xVelocity = 0
         self.yVelocity = 0
