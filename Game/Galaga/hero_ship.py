@@ -1,6 +1,7 @@
 from PySide.QtCore import Qt
 from PySide.QtGui import QImage, QMatrix
 
+from Game.Core.game_engine import TheGameEngine
 from Game.Core.game_object_rectangle import GameObjectRectangle
 
 class HeroShip:
@@ -17,8 +18,6 @@ class HeroShip:
 
         self.xVelocity = 0
         self.yVelocity = 0
-
-        self.update = False
 
     def timer(self):
         """ Handle a timer event """
@@ -69,7 +68,7 @@ class HeroShip:
         """ Try to move the ship to a new location """
         self.rectangle.x = self.getValidPosition(newX, self.rectangle.width)
         self.rectangle.y = self.getValidPosition(newY, self.rectangle.height)
-        self.update = True
+        TheGameEngine.updateUI()
 
     def getValidPosition(self, newPosition, shipSize):
         """ Return if the new Position is a valid Position """

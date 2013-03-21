@@ -25,6 +25,10 @@ class GameEngine:
         self.controller.performGameCycle()
         self.window.update()
 
+    def updateUI(self):
+        """ Set the UI to update """
+        self.window.update()
+
     def windowHeight(self):
         """ Returns the Window Height """
         return self.window.contentsRect().height()

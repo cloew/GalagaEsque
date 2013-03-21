@@ -6,7 +6,6 @@ class GalagaEsque(QMainWindow):
     def __init__(self):
         QMainWindow.__init__(self)
 
-        self.setGeometry(300, 300, 640, 480)
         self.setWindowTitle('Galaga-Esque')
         self.level_controller = LevelController(self)
         self.level_controller.run()

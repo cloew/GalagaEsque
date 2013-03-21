@@ -1,7 +1,6 @@
 from PySide.QtCore import QBasicTimer, Qt
 from PySide.QtGui import QFrame, QPainter, QWidget
 
-from Game.Core.game_engine import TheGameEngine
 from hero_ship_view import HeroShipView
 
 class LevelView(QFrame):
@@ -33,11 +32,8 @@ class LevelView(QFrame):
             self.level.ship.down(self.contentsRect().width(), self.contentsRect().height())
         elif key == Qt.Key_Up:
             self.level.ship.up(self.contentsRect().width(), self.contentsRect().height())
-        else:
-            QWidget.keyPressEvent(self, event)
-
-        if self.level.ship.update:
-            self.update()
+        
+        QWidget.keyPressEvent(self, event)
 
     def keyReleaseEvent(self, event):
         """ Process Keys """
@@ -51,8 +47,5 @@ class LevelView(QFrame):
             self.level.ship.releaseDown()
         elif key == Qt.Key_Up:
             self.level.ship.releaseUp()
-        else:
-            QWidget.keyPressEvent(self, event)
-
-        if self.level.ship.update:
-            self.update()
+        
+        QWidget.keyPressEvent(self, event)
