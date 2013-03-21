@@ -1,8 +1,8 @@
 from PySide.QtCore import QBasicTimer, Qt
 from PySide.QtGui import QFrame, QPainter, QWidget
 
-from game_engine import TheGameEngine
-from hero_ship import HeroShip
+from Game.Core.game_engine import TheGameEngine
+from Game.Core.hero_ship import HeroShip
 from hero_ship_view import HeroShipView
 
 class Board(QFrame):

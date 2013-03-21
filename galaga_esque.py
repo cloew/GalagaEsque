@@ -1,4 +1,4 @@
-from board import Board
+from View.level_view import Board
 from PySide.QtGui import QDesktopWidget, QMainWindow
 
 class GalagaEsque(QMainWindow):

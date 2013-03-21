@@ -1,7 +1,7 @@
 from PySide.QtCore import Qt
 from PySide.QtGui import QImage, QMatrix
 
-from game_object_rectangle import GameObjectRectangle
+from Game.Core.game_object_rectangle import GameObjectRectangle
 
 class HeroShip:
     """ Hero Ship """
