@@ -25,13 +25,17 @@ class LevelView(QFrame):
         """ Paint the ship """
         painter = QPainter(self)
         self.background.draw(painter, self)
+        self.drawLasers(painter)
+        self.ship_view.draw(painter, self)
+        self.enemy_view.draw(painter, self)
+        
+    def drawLasers(self, painter):
+        """ Draw Lasers """
         for laser_view in self.laser_views:
             if laser_view.laser not in self.level.lasers:
                 self.laser_views.remove(laser_view)
             else:
                 laser_view.draw(painter, self)
-        self.ship_view.draw(painter, self)
-        self.enemy_view.draw(painter, self)
         
     def addLaser(self):
         """ Add a laser to the screen """
