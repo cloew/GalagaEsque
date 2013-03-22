@@ -9,7 +9,7 @@ class Laser:
 
     def __init__(self):
         """ Create the hero ship """
-        self.rectangle = GameObjectRectangle(1, 2)
+        self.rectangle = GameObjectRectangle(.5, 5)
 
         self.rectangle.setCenterX(50)
         self.rectangle.setCenterY(50)

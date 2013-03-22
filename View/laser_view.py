@@ -6,15 +6,15 @@ class LaserView:
 
     def __init__(self, laser_model):
         """ Initialize the ship view """
-        self.laser_model = laser_model
+        self.laser = laser_model
         self.scaled_laser = None
 
     def loadShipImage(self, width, height):
         """ Load the ship image """
         self.unscaled_laser = QImage("laser.png")
 
-        xScaledSize = width*self.laser_model.rectangle.width/100
-        yScaledSize = height*self.laser_model.rectangle.height/100
+        xScaledSize = width*self.laser.rectangle.width/100
+        yScaledSize = height*self.laser.rectangle.height/100
         
         self.scaled_laser = self.unscaled_laser.scaled(xScaledSize, yScaledSize)
 
@@ -23,4 +23,4 @@ class LaserView:
         if self.scaled_laser is None:
             self.loadShipImage(window.contentsRect().width(), window.contentsRect().height())
 
-        painter.drawImage(self.laser_model.rectangle.x*window.contentsRect().width()/100, self.laser_model.rectangle.y*window.contentsRect().height()/100, self.scaled_laser)
+        painter.drawImage(self.laser.rectangle.x*window.contentsRect().width()/100, self.laser.rectangle.y*window.contentsRect().height()/100, self.scaled_laser)

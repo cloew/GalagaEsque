@@ -33,6 +33,9 @@ class LevelController:
             self.level.ship.down()
         elif key == Qt.Key_Up:
             self.level.ship.up()
+        elif key == Qt.Key_Space:
+            self.level.addLaser()
+            self.window.addLaser()
 
     def keyReleased(self, key):
         """ Called when the Game Engine gets a keyReleased event """
