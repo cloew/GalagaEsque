@@ -13,9 +13,11 @@ class Level:
 
     def performGameCycle(self):
         """ Runs a single iteration of the Game """
+        for laser in self.lasers:
+            laser.timer()
         self.ship.timer()
         self.enemy.timer()
         
     def addLaser(self):
         """ Add a laser to the screen """
-        self.lasers.append(Laser())
+        self.lasers.append(Laser(self.ship.rectangle.x, self.ship.rectangle.y))
