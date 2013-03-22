@@ -23,15 +23,6 @@ class Laser:
 
     def tryMove(self, newX, newY):
         """ Try to move the ship to a new location """
-        self.rectangle.x = self.getValidPosition(newX, self.rectangle.width)
-        self.rectangle.y = self.getValidPosition(newY, self.rectangle.height)
+        self.rectangle.x = newX
+        self.rectangle.y = newY
         TheGameEngine.updateUI()
-
-    def getValidPosition(self, newPosition, laserSize):
-        """ Return if the new Position is a valid Position """
-        if newPosition < 0:
-            return 0
-        elif newPosition + laserSize > 100:
-            return 100 - laserSize
-        else:
-            return newPosition
