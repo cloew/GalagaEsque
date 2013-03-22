@@ -26,7 +26,10 @@ class LevelView(QFrame):
         painter = QPainter(self)
         self.background.draw(painter, self)
         for laser_view in self.laser_views:
-            laser_view.draw(painter, self)
+            if laser_view.laser not in self.level.lasers:
+                self.laser_views.remove(laser_view)
+            else:
+                laser_view.draw(painter, self)
         self.ship_view.draw(painter, self)
         self.enemy_view.draw(painter, self)
         

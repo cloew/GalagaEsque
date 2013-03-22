@@ -20,6 +20,10 @@ class Laser:
     def timer(self):
         """ Handle a timer event """
         self.tryMove(self.rectangle.x+self.xVelocity, self.rectangle.y+self.yVelocity)
+        
+    def offScreen(self):
+        """ Return if the laser is off the screen """
+        return self.rectangle.bottom() <= 0
 
     def tryMove(self, newX, newY):
         """ Try to move the ship to a new location """

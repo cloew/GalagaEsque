@@ -15,6 +15,8 @@ class Level:
         """ Runs a single iteration of the Game """
         for laser in self.lasers:
             laser.timer()
+            if laser.offScreen():
+                self.lasers.remove(laser)
         self.ship.timer()
         self.enemy.timer()
         
