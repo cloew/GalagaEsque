@@ -20,6 +20,10 @@ class Level:
         self.ship.timer()
         self.enemy.timer()
         
+        for laser in self.lasers:
+            if laser.rectangle.collide(self.enemy.rectangle):
+                self.lasers.remove(laser)
+        
     def addLaser(self):
         """ Add a laser to the screen """
         self.lasers.append(Laser(self.ship))
