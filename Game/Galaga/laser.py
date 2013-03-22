@@ -7,12 +7,12 @@ from Game.Core.game_object_rectangle import GameObjectRectangle
 class Laser:
     """ Represents a Laser in the Galaga Game """
 
-    def __init__(self, x, y):
-        """ Create the hero ship """
+    def __init__(self, parent_ship):
+        """ Create the laser """
         self.rectangle = GameObjectRectangle(.5, 5)
 
-        self.rectangle.setCenterX(x)
-        self.rectangle.setCenterY(y)
+        self.rectangle.setCenterX(parent_ship.rectangle.getCenterX())
+        self.rectangle.setBottom(parent_ship.rectangle.top())
 
         self.xVelocity = 0
         self.yVelocity = -1

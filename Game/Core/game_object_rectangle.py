@@ -10,6 +10,14 @@ class GameObjectRectangle:
         self.width = xSize
         self.height = ySize
         
+    def getCenterX(self):
+        """ Return the Rectangle's center X Coordinate """
+        return self.x + self.width/2.0
+        
+    def getCenterY(self):
+        """ Return the Rectangle's center Y Coordinate """
+        return self.y + self.height/2.0
+        
     def top(self):
         """ Return the Rectangle's top Y Coordinate """
         return self.y
@@ -44,6 +52,10 @@ class GameObjectRectangle:
     def setCenterY(self, y):
         """ Center the Rectangle on the Y Coordinate given """
         self.y = y - self.height/2.0
+        
+    def setBottom(self, bottom):
+        """ Set the bottom of the rectangle """
+        self.y = bottom-self.height
 
     def moveToLeft(self):
         """ Move the Rectangle to the left of the screen """

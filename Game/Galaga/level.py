@@ -22,4 +22,4 @@ class Level:
         
     def addLaser(self):
         """ Add a laser to the screen """
-        self.lasers.append(Laser(self.ship.rectangle.x, self.ship.rectangle.y))
+        self.lasers.append(Laser(self.ship))
