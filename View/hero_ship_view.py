@@ -20,7 +20,6 @@ class HeroShipView:
         yScaledSize = height*self.ship_model.rectangle.height/100
         
         self.scaled_ship = self.unscaled_ship.scaled(xScaledSize, yScaledSize)
-        self.update = True
 
     def draw(self, painter, window):
         """ Draw the image """
@@ -28,4 +27,3 @@ class HeroShipView:
             self.loadShipImage(window.contentsRect().width(), window.contentsRect().height())
 
         painter.drawImage(self.ship_model.rectangle.x*window.contentsRect().width()/100, self.ship_model.rectangle.y*window.contentsRect().height()/100, self.scaled_ship)
-        self.update = False
