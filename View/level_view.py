@@ -31,11 +31,13 @@ class LevelView(QFrame):
         self.enemy_view.draw(painter, self)
         if not self.level.over:
             self.drawScore(painter)
+            if self.level.paused:
+                self.drawPaused(painter)
         else:
             self.drawGameOver(painter)
         
     def drawScore(self, painter):
-        """ Draw the score label """
+        """ Draw the Score label """
         font = QFont()
         font.setPointSize(24)
         penColor = QColor(238, 250, 12)
@@ -44,8 +46,18 @@ class LevelView(QFrame):
         painter.setPen(penColor)
         painter.drawText(10, 50, "Score: {0:,}".format(self.level.score))
         
+    def drawPaused(self, painter):
+        """ Draw the Paused Message """
+        font = QFont()
+        font.setPointSize(48)
+        penColor = QColor(238, 250, 12)
+        
+        painter.setFont(font)
+        painter.setPen(penColor)
+        painter.drawText(self.contentsRect(), Qt.AlignCenter, "Paused")
+        
     def drawGameOver(self, painter):
-        """ Draw the game over """
+        """ Draw the Game Over Message """
         font = QFont()
         font.setPointSize(48)
         penColor = QColor(255, 0, 0)

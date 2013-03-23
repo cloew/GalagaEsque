@@ -12,7 +12,6 @@ class LevelController:
     def __init__(self, application):
         """ Initialize the Level Controller """
         self.application = application
-        self.paused =  False
         self.level = Level()
         self.window = LevelView(application, self.level)
 
@@ -47,20 +46,10 @@ class LevelController:
                     
     def performPauseAction(self):
         """ Perform a Pause Action """
-        if self.paused:
-            self.unpause()
+        if self.level.paused:
+            self.level.unpause()
         else:
-            self.pause()
-                    
-    def pause(self):
-        """ Pause the game """
-        self.paused = True
-        TheGameEngine.stop()
-        
-    def unpause(self):
-        """ Unpause the game """
-        self.paused = False
-        TheGameEngine.startTimer()
+            self.level.pause()
 
     def keyReleased(self, key):
         """ Called when the Game Engine gets a keyReleased event """

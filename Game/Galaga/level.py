@@ -14,6 +14,7 @@ class Level:
         self.ship = HeroShip()
         self.enemy = EnemyShip()
         self.lasers = []
+        self.paused = False
         self.score = 0
         self.over = False
 
@@ -41,6 +42,17 @@ class Level:
         """ Ends the Game """
         self.over = True
         self.lasers = []
+        
+    def pause(self):
+        """ Pause the game """
+        self.paused = True
+        TheGameEngine.stop()
+        TheGameEngine.updateUI()
+        
+    def unpause(self):
+        """ Unpause the game """
+        self.paused = False
+        TheGameEngine.startTimer()
         
     def addLaser(self):
         """ Add a laser to the screen """
