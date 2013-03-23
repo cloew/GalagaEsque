@@ -43,13 +43,24 @@ class LevelController:
             if self.level.over:
                 QCoreApplication.instance().quit()
             else:
-                if self.paused:
-                    self.paused = False
-                    TheGameEngine.startTimer()
-                else:
-                    self.paused = True
-                    TheGameEngine.stop()
+                self.performPauseAction()
+                    
+    def performPauseAction(self):
+        """ Perform a Pause Action """
+        if self.paused:
+            self.unpause()
+        else:
+            self.pause()
+                    
+    def pause(self):
+        """ Pause the game """
+        self.paused = True
+        TheGameEngine.stop()
         
+    def unpause(self):
+        """ Unpause the game """
+        self.paused = False
+        TheGameEngine.startTimer()
 
     def keyReleased(self, key):
         """ Called when the Game Engine gets a keyReleased event """
