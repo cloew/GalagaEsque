@@ -19,6 +19,10 @@ class EnemyShip:
 
         self.xVelocity = EnemyShip.MIN_SPEED
         self.yVelocity = 0
+        
+    def hit(self, laser):
+        """ Return if an enemy is hit with a laser """
+        return laser.rectangle.collide(self.rectangle)
 
     def timer(self):
         """ Handle a timer event """

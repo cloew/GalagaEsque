@@ -10,6 +10,7 @@ class Level:
         self.ship = HeroShip()
         self.enemy = EnemyShip()
         self.lasers = []
+        self.score = 0
 
     def performGameCycle(self):
         """ Runs a single iteration of the Game """
@@ -21,8 +22,9 @@ class Level:
         self.enemy.timer()
         
         for laser in self.lasers:
-            if laser.rectangle.collide(self.enemy.rectangle):
+            if self.enemy.hit(laser):
                 self.lasers.remove(laser)
+                self.score += 10
         
     def addLaser(self):
         """ Add a laser to the screen """

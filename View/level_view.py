@@ -1,5 +1,5 @@
-from PySide.QtCore import QBasicTimer, Qt
-from PySide.QtGui import QFrame, QImage, QPainter, QWidget
+from PySide.QtCore import QBasicTimer, QRect, Qt
+from PySide.QtGui import QApplication, QColor, QFont, QFrame, QImage, QLabel, QPainter, QPushButton, QStyle, QStyleOptionButton, QWidget
 
 from background_view import BackgroundView
 from enemy_ship_view import EnemyShipView
@@ -24,10 +24,22 @@ class LevelView(QFrame):
     def paintEvent(self, event):
         """ Paint the ship """
         painter = QPainter(self)
+        
         self.background.draw(painter, self)
         self.drawLasers(painter)
         self.ship_view.draw(painter, self)
         self.enemy_view.draw(painter, self)
+        self.drawScore(painter)
+        
+    def drawScore(self, painter):
+        """ Draw the score label """
+        font = QFont()
+        font.setPointSize(24)
+        penColor = QColor(238, 250, 12)
+        
+        painter.setFont(font)
+        painter.setPen(penColor)
+        painter.drawText(10, 50, "Score: {0:,}".format(self.level.score))
         
     def drawLasers(self, painter):
         """ Draw Lasers """
