@@ -35,7 +35,7 @@ class LevelController:
         elif key == Qt.Key_Up:
             self.level.ship.up()
         elif key == Qt.Key_Space:
-            if len(self.level.lasers) < LevelController.MAX_LASERS:
+            if len(self.level.lasers) < LevelController.MAX_LASERS and not self.level.over:
                 self.level.addLaser()
                 self.window.addLaser()
         elif key == Qt.Key_Return or key == Qt.Key_Enter:
