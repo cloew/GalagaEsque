@@ -22,6 +22,10 @@ class GameEngine:
         self.window.keyReleaseEvent = self.keyReleased
         
         self.timer.start(GameEngine.Speed, self.object)
+        
+    def stop(self):
+        """ Stop the game engine game timer """
+        self.timer.stop()
 
     def timerEvent(self, event):
         """ Run the Game Timer Loop """

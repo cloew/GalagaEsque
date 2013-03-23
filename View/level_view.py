@@ -47,12 +47,12 @@ class LevelView(QFrame):
     def drawGameOver(self, painter):
         """ Draw the game over """
         font = QFont()
-        font.setPointSize(24)
+        font.setPointSize(48)
         penColor = QColor(255, 0, 0)
         
         painter.setFont(font)
         painter.setPen(penColor)
-        painter.drawText(self.contentsRect().width()/2, self.contentsRect().height()/2, "Game Over")
+        painter.drawText(self.contentsRect(), Qt.AlignCenter, "Game Over")
         
     def drawLasers(self, painter):
         """ Draw Lasers """

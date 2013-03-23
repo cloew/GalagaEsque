@@ -2,9 +2,13 @@ from enemy_ship import EnemyShip
 from hero_ship import HeroShip
 from laser import Laser
 
+from Game.Core.game_engine import TheGameEngine
+
 class Level:
     """ Represents a level in the Galaga Esque Game """
-
+    SCORE_PER_HIT = 10
+    SCORE_TO_WIN = 100
+    
     def __init__(self):
         """ Initialize the level """
         self.ship = HeroShip()
@@ -25,9 +29,10 @@ class Level:
         for laser in self.lasers:
             if self.enemy.hit(laser):
                 self.lasers.remove(laser)
-                self.score += 10
-                if self.score >= 1000:
+                self.score += Level.SCORE_PER_HIT
+                if self.score >= Level.SCORE_TO_WIN:
                     self.over = True
+                    TheGameEngine.stop()
         
     def addLaser(self):
         """ Add a laser to the screen """

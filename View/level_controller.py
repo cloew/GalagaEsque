@@ -7,7 +7,8 @@ from PySide.QtCore import Qt
 
 class LevelController:
     """ It's the controller for a Level """
-
+    MAX_LASERS = 10
+    
     def __init__(self, application):
         """ Initialize the Level Controller """
         self.application = application
@@ -34,7 +35,7 @@ class LevelController:
         elif key == Qt.Key_Up:
             self.level.ship.up()
         elif key == Qt.Key_Space:
-            if len(self.level.lasers) < 10:
+            if len(self.level.lasers) < LevelController.MAX_LASERS:
                 self.level.addLaser()
                 self.window.addLaser()
 
