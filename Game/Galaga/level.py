@@ -33,6 +33,7 @@ class Level:
                 if self.score >= Level.SCORE_TO_WIN:
                     self.over = True
                     TheGameEngine.stop()
+                    self.lasers = []
         
     def addLaser(self):
         """ Add a laser to the screen """
