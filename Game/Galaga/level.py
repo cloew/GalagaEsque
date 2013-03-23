@@ -28,12 +28,20 @@ class Level:
         
         for laser in self.lasers:
             if self.enemy.hit(laser):
-                self.lasers.remove(laser)
-                self.score += Level.SCORE_PER_HIT
-                if self.score >= Level.SCORE_TO_WIN:
-                    self.over = True
-                    TheGameEngine.stop()
-                    self.lasers = []
+                self.onEnemyHit(laser)
+                    
+    def onEnemyHit(self, laser):
+        """ Perform on Enemy Hit """
+        self.lasers.remove(laser)
+        self.score += Level.SCORE_PER_HIT
+        if self.score >= Level.SCORE_TO_WIN:
+            self.endTheGame()
+        
+    def endTheGame(self):
+        """ Ends the Game """
+        self.over = True
+        TheGameEngine.stop()
+        self.lasers = []
         
     def addLaser(self):
         """ Add a laser to the screen """
