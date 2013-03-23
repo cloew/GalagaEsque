@@ -38,7 +38,7 @@ class LevelController:
             if len(self.level.lasers) < LevelController.MAX_LASERS:
                 self.level.addLaser()
                 self.window.addLaser()
-        elif key == Qt.Key_Return:
+        elif key == Qt.Key_Return or key == Qt.Key_Enter:
             if self.level.over:
                 QCoreApplication.instance().quit()
         
