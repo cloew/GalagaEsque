@@ -55,7 +55,7 @@ class GameObjectRectangle:
         
     def setBottom(self, bottom):
         """ Set the bottom of the rectangle """
-        self.y = bottom-self.height
+        self.y = bottom - self.height
 
     def moveToLeft(self):
         """ Move the Rectangle to the left of the screen """

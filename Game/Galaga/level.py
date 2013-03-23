@@ -40,7 +40,6 @@ class Level:
     def endTheGame(self):
         """ Ends the Game """
         self.over = True
-        TheGameEngine.stop()
         self.lasers = []
         
     def addLaser(self):

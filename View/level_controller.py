@@ -3,7 +3,7 @@ from level_view import LevelView
 from Game.Core.game_engine import TheGameEngine
 from Game.Galaga.level import Level
 
-from PySide.QtCore import Qt
+from PySide.QtCore import QCoreApplication, Qt
 
 class LevelController:
     """ It's the controller for a Level """
@@ -38,6 +38,10 @@ class LevelController:
             if len(self.level.lasers) < LevelController.MAX_LASERS:
                 self.level.addLaser()
                 self.window.addLaser()
+        elif key == Qt.Key_Return:
+            if self.level.over:
+                QCoreApplication.instance().quit()
+        
 
     def keyReleased(self, key):
         """ Called when the Game Engine gets a keyReleased event """
