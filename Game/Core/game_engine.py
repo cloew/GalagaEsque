@@ -20,7 +20,10 @@ class GameEngine:
         self.window = window
         self.window.keyPressEvent = self.keyPressed
         self.window.keyReleaseEvent = self.keyReleased
+        self.startTimer()
         
+    def startTimer(self):
+        """ Start the Game Timer """
         self.timer.start(GameEngine.Speed, self.object)
         
     def stop(self):
