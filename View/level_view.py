@@ -29,7 +29,10 @@ class LevelView(QFrame):
         self.drawLasers(painter)
         self.ship_view.draw(painter, self)
         self.enemy_view.draw(painter, self)
-        self.drawScore(painter)
+        if not self.level.over:
+            self.drawScore(painter)
+        else:
+            self.drawGameOver(painter)
         
     def drawScore(self, painter):
         """ Draw the score label """
@@ -40,6 +43,16 @@ class LevelView(QFrame):
         painter.setFont(font)
         painter.setPen(penColor)
         painter.drawText(10, 50, "Score: {0:,}".format(self.level.score))
+        
+    def drawGameOver(self, painter):
+        """ Draw the game over """
+        font = QFont()
+        font.setPointSize(24)
+        penColor = QColor(255, 0, 0)
+        
+        painter.setFont(font)
+        painter.setPen(penColor)
+        painter.drawText(self.contentsRect().width()/2, self.contentsRect().height()/2, "Game Over")
         
     def drawLasers(self, painter):
         """ Draw Lasers """

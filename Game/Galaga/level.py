@@ -11,6 +11,7 @@ class Level:
         self.enemy = EnemyShip()
         self.lasers = []
         self.score = 0
+        self.over = False
 
     def performGameCycle(self):
         """ Runs a single iteration of the Game """
@@ -25,6 +26,8 @@ class Level:
             if self.enemy.hit(laser):
                 self.lasers.remove(laser)
                 self.score += 10
+                if self.score >= 1000:
+                    self.over = True
         
     def addLaser(self):
         """ Add a laser to the screen """
